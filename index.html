@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Skincare 2025 Year-End Review | Market Analytics Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        'sans': ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                    colors: {
+                        'teal': {
+                            900: '#0a3d3d',
+                            800: '#0d4d4d',
+                            700: '#115e5e',
+                            600: '#147373',
+                            500: '#178787',
+                        },
+                        'gold': {
+                            50: '#fefce8',
+                            100: '#fef9c3',
+                            200: '#fef08a',
+                            400: '#facc15',
+                            500: '#eab308',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html { scroll-behavior: smooth; }
+        .hero-gradient {
+            background: radial-gradient(ellipse at center, #F39A5C 0%, #D87129 100%);
+        }
+        .chart-container { position: relative; height: 300px; }
+        .trend-number { font-feature-settings: 'tnum'; font-variant-numeric: tabular-nums; }
+        .section-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: #0d4d4d;
+        }
+        .section-label::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #0d4d4d;
+            border-radius: 2px;
+        }
+        /* Hover animations */
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        .card-hover:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+        }
+        .stat-card-hover {
+            transition: all 0.3s ease;
+        }
+        .stat-card-hover:hover {
+            transform: translateY(-2px) scale(1.02);
+            box-shadow: 0 8px 20px -4px rgba(0, 0, 0, 0.2);
+        }
+    </style>
+</head>
+<body class="font-sans bg-gray-50 text-gray-900 antialiased">
+
+    <!-- Hero Section -->
+    <section class="hero-gradient min-h-[650px] relative overflow-hidden">
+        <!-- Decorative Elements -->
+        <div class="absolute inset-0 overflow-hidden">
+            <div class="absolute top-20 left-10 w-64 h-64 bg-white/5 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-20 right-10 w-80 h-80 bg-white/5 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="max-w-7xl mx-auto px-6 py-12 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 items-center min-h-[580px]">
+
+                <!-- Left Content -->
+                <div class="text-center lg:text-left">
+                    <!-- Logo -->
+                    <div class="mb-6">
+                        <h2 class="text-4xl md:text-5xl text-white tracking-wide font-light">
+                            <span class="italic font-normal">N</span>avigo
+                        </h2>
+                        <p class="text-xs text-white/70 uppercase tracking-[0.4em] mt-1">Marketing</p>
+                    </div>
+
+                    <!-- Badge -->
+                    <div class="inline-flex items-center gap-3 bg-white/15 backdrop-blur-md border border-white/25 rounded-full px-5 py-2.5 mb-8">
+                        <svg class="w-4 h-4 text-yellow-300" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M12 2L9.19 8.63L2 9.24l5.46 4.73L5.82 21L12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2z"/>
+                        </svg>
+                        <span class="text-white text-sm font-medium tracking-wider uppercase">2025 Year-End Review</span>
+                        <svg class="w-4 h-4 text-white/80" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/>
+                        </svg>
+                    </div>
+
+                    <!-- Main Heading -->
+                    <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-white leading-[1.1] mb-6">
+                        Skincare <span class="text-yellow-200">&</span><br>
+                        <span class="text-yellow-200">Personal Care</span>
+                    </h1>
+
+                    <!-- Subtitle -->
+                    <p class="text-white/80 text-lg md:text-xl mb-10 max-w-lg mx-auto lg:mx-0">
+                        Performance, Concentration, and the Shift to a Selective System
+                    </p>
+
+                    <!-- Stat Cards - 2x2 Grid -->
+                    <div class="grid grid-cols-2 gap-3 max-w-md mx-auto lg:mx-0">
+                        <!-- Card 1 -->
+                        <div class="bg-white/95 rounded-2xl p-5 text-center stat-card-hover cursor-pointer shadow-xl">
+                            <div class="flex items-center justify-center gap-1.5 mb-1">
+                                <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 17l6-6 4 4 6-6"/>
+                                </svg>
+                                <span class="text-xs font-bold text-red-500">-24%</span>
+                            </div>
+                            <p class="text-3xl md:text-4xl font-extrabold text-gray-900 trend-number">180</p>
+                            <p class="text-xs text-gray-500 font-medium mt-1">Selling Brands</p>
+                        </div>
+
+                        <!-- Card 2 -->
+                        <div class="bg-white/95 rounded-2xl p-5 text-center stat-card-hover cursor-pointer shadow-xl">
+                            <div class="flex items-center justify-center gap-1.5 mb-1">
+                                <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 17l6-6 4 4 6-6"/>
+                                </svg>
+                                <span class="text-xs font-bold text-red-500">-20%</span>
+                            </div>
+                            <p class="text-3xl md:text-4xl font-extrabold text-gray-900 trend-number">545</p>
+                            <p class="text-xs text-gray-500 font-medium mt-1">Selling Items</p>
+                        </div>
+
+                        <!-- Card 3 -->
+                        <div class="bg-white/95 rounded-2xl p-5 text-center stat-card-hover cursor-pointer shadow-xl">
+                            <div class="flex items-center justify-center gap-1.5 mb-1">
+                                <svg class="w-4 h-4 text-red-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 17l6-6 4 4 6-6"/>
+                                </svg>
+                                <span class="text-xs font-bold text-red-500">-5.2%</span>
+                            </div>
+                            <p class="text-3xl md:text-4xl font-extrabold text-gray-900 trend-number">34M</p>
+                            <p class="text-xs text-gray-500 font-medium mt-1">Sponsored Plcmts</p>
+                        </div>
+
+                        <!-- Card 4 -->
+                        <div class="bg-white/95 rounded-2xl p-5 text-center stat-card-hover cursor-pointer shadow-xl">
+                            <div class="flex items-center justify-center gap-1.5 mb-1">
+                                <svg class="w-4 h-4 text-green-500" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" d="M18 7l-6 6-4-4-6 6"/>
+                                </svg>
+                                <span class="text-xs font-bold text-green-500">+15.7%</span>
+                            </div>
+                            <p class="text-3xl md:text-4xl font-extrabold text-gray-900 trend-number">25.5B</p>
+                            <p class="text-xs text-gray-500 font-medium mt-1">Visibility</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Phone Mockup -->
+                <div class="hidden lg:flex justify-center items-center">
+                    <div class="relative">
+                        <!-- Phone Device -->
+                        <div class="relative w-[280px] h-[560px] bg-gray-900 rounded-[3rem] p-3 shadow-2xl transform rotate-[-6deg] hover:rotate-0 transition-transform duration-500">
+                            <!-- Phone Notch -->
+                            <div class="absolute top-3 left-1/2 transform -translate-x-1/2 w-24 h-6 bg-gray-900 rounded-b-2xl z-20"></div>
+
+                            <!-- Phone Screen -->
+                            <div class="w-full h-full bg-gray-100 rounded-[2.25rem] overflow-hidden relative">
+                                <!-- Status Bar -->
+                                <div class="bg-white px-6 py-2 flex justify-between items-center text-[10px] text-gray-600">
+                                    <span>9:41</span>
+                                    <div class="flex gap-1">
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M12 3L2 12h3v8h6v-6h2v6h6v-8h3L12 3z"/></svg>
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M1 9l2 2c4.97-4.97 13.03-4.97 18 0l2-2C16.93 2.93 7.08 2.93 1 9zm8 8l3 3 3-3c-1.65-1.66-4.34-1.66-6 0zm-4-4l2 2c2.76-2.76 7.24-2.76 10 0l2-2C15.14 9.14 8.87 9.14 5 13z"/></svg>
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24"><path d="M16 6h2v12h-2zm-4-2h2v14h-2zm-4 6h2v8H8zm-4 4h2v4H4z"/></svg>
+                                    </div>
+                                </div>
+
+                                <!-- Amazon Header -->
+                                <div class="bg-[#232f3e] px-4 py-3">
+                                    <div class="flex items-center gap-2 bg-white rounded-lg px-3 py-2">
+                                        <svg class="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                                        <span class="text-xs text-gray-400">Search Amazon</span>
+                                    </div>
+                                </div>
+
+                                <!-- Content -->
+                                <div class="p-3 space-y-2 bg-gray-100">
+                                    <div class="bg-white rounded-xl p-3 shadow-sm">
+                                        <p class="text-xs font-bold text-gray-800 mb-1">Top Beauty Products</p>
+                                        <p class="text-[10px] text-gray-500">bestsellers</p>
+                                    </div>
+
+                                    <!-- Product 1 -->
+                                    <div class="bg-white rounded-xl p-3 shadow-sm flex gap-3">
+                                        <div class="w-14 h-14 bg-gradient-to-br from-pink-100 to-pink-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <span class="text-pink-400 text-lg">💄</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-[10px] text-gray-800 font-semibold truncate">Revlon One-Step Hair Dryer</p>
+                                            <div class="flex items-center gap-1 mt-0.5">
+                                                <span class="text-xs font-bold text-gray-900">$34.90</span>
+                                                <span class="text-[10px] text-gray-400 line-through">$54.99</span>
+                                            </div>
+                                            <div class="flex items-center gap-1 mt-1">
+                                                <span class="text-yellow-400 text-[10px]">★★★★★</span>
+                                                <span class="text-[9px] text-gray-400">87,592</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product 2 -->
+                                    <div class="bg-white rounded-xl p-3 shadow-sm flex gap-3">
+                                        <div class="w-14 h-14 bg-gradient-to-br from-purple-100 to-purple-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <span class="text-purple-400 text-lg">🧴</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-[10px] text-gray-800 font-semibold truncate">CeraVe Moisturizing Cream</p>
+                                            <div class="flex items-center gap-1 mt-0.5">
+                                                <span class="text-xs font-bold text-gray-900">$18.50</span>
+                                                <span class="text-[10px] text-gray-400 line-through">$21.99</span>
+                                            </div>
+                                            <div class="flex items-center gap-1 mt-1">
+                                                <span class="text-yellow-400 text-[10px]">★★★★★</span>
+                                                <span class="text-[9px] text-gray-400">143,205</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Product 3 -->
+                                    <div class="bg-white rounded-xl p-3 shadow-sm flex gap-3">
+                                        <div class="w-14 h-14 bg-gradient-to-br from-rose-100 to-rose-200 rounded-lg flex items-center justify-center flex-shrink-0">
+                                            <span class="text-rose-400 text-lg">✨</span>
+                                        </div>
+                                        <div class="flex-1 min-w-0">
+                                            <p class="text-[10px] text-gray-800 font-semibold truncate">LANEIGE Lip Sleeping Mask</p>
+                                            <div class="flex items-center gap-1 mt-0.5">
+                                                <span class="text-xs font-bold text-gray-900">$24.00</span>
+                                                <span class="text-[10px] text-gray-400 line-through">$29.00</span>
+                                            </div>
+                                            <div class="flex items-center gap-1 mt-1">
+                                                <span class="text-yellow-400 text-[10px]">★★★★★</span>
+                                                <span class="text-[9px] text-gray-400">53,241</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Floating Badge -->
+                        <div class="absolute -top-4 -right-4 bg-yellow-400 text-gray-900 px-3 py-1.5 rounded-full text-xs font-bold shadow-lg transform rotate-12">
+                            #1 Bestseller
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What Defined 2025 -->
+    <section id="overview" class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Category Overview</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">What Defined Skincare in 2025</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6 mb-10">
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Fewer Brands, Higher Stakes</h3>
+                        <p class="text-sm text-gray-600">Brand count dropped 24% as the category consolidated around proven performers.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Organic Momentum Up</h3>
+                        <p class="text-sm text-gray-600">Despite fewer players, organic visibility increased 15.7% year-over-year.</p>
+                    </div>
+                </div>
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-1">Prices Held Steady</h3>
+                        <p class="text-sm text-gray-600">Average price remained stable at $27.81 despite market consolidation.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Insight Callout -->
+            <div class="bg-gold-50 border border-gold-200 rounded-xl p-6">
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-gold-400 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Key Insight</h3>
+                        <p class="text-sm text-gray-700">The skincare category became more selective in 2025—fewer brands, fewer SKUs, fewer viable visibility paths. Despite consolidation, organic visibility increased and top performers captured larger demand shares.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Three Market Signals -->
+    <section id="signals" class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Market Signals</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Three Signals That Defined 2025</h2>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-8 h-8 bg-teal-800 text-white rounded-lg flex items-center justify-center font-bold text-sm">01</span>
+                        <h3 class="font-semibold text-gray-900">Search Became Intent-Based</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Long-tail discovery declined. Shoppers arrived on Amazon with predetermined purchases in mind. Mid-intent and branded queries replaced generic category searches.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-8 h-8 bg-teal-800 text-white rounded-lg flex items-center justify-center font-bold text-sm">02</span>
+                        <h3 class="font-semibold text-gray-900">Paid Media Lost Expansion Role</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        CPC floors stabilized at higher levels. Sponsored placements defended existing share rather than created new demand. Paid media required organic momentum to succeed.
+                    </p>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer">
+                    <div class="flex items-center gap-3 mb-4">
+                        <span class="w-8 h-8 bg-teal-800 text-white rounded-lg flex items-center justify-center font-bold text-sm">03</span>
+                        <h3 class="font-semibold text-gray-900">Organic Rewarded Authority</h3>
+                    </div>
+                    <p class="text-sm text-gray-600 leading-relaxed">
+                        Organic visibility concentrated among fewer brands. Reviews, PDP clarity, and perceived authority became decisive ranking signals.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Concentration -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Competitive Dynamics</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Market Concentration & Share</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Chart -->
+                <div class="bg-gray-50 rounded-xl p-6">
+                    <h3 class="font-semibold text-gray-900 mb-1">Brand Market Share</h3>
+                    <p class="text-sm text-gray-500 mb-6">Top 8 brands by share of sales</p>
+                    <div class="chart-container">
+                        <canvas id="marketShareChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Stats & Takeaways -->
+                <div class="space-y-6">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="font-semibold text-gray-900 mb-4">Share Concentration</h3>
+                        <div class="space-y-4">
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Top 1 Brand (CeraVe)</span>
+                                    <span class="font-semibold text-gray-900">12.3%</span>
+                                </div>
+                                <div class="h-2 bg-gray-200 rounded-full">
+                                    <div class="h-2 bg-teal-700 rounded-full" style="width: 41%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Top 3 Brands Combined</span>
+                                    <span class="font-semibold text-gray-900">~30%</span>
+                                </div>
+                                <div class="h-2 bg-gray-200 rounded-full">
+                                    <div class="h-2 bg-teal-600 rounded-full" style="width: 60%"></div>
+                                </div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between text-sm mb-1">
+                                    <span class="text-gray-600">Top 5 Brands Combined</span>
+                                    <span class="font-semibold text-gray-900">~38%</span>
+                                </div>
+                                <div class="h-2 bg-gray-200 rounded-full">
+                                    <div class="h-2 bg-teal-500 rounded-full" style="width: 76%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Key Takeaways -->
+                    <div class="bg-gold-50 border border-gold-200 rounded-xl p-6">
+                        <h3 class="font-semibold text-gray-900 mb-3">Key Takeaways</h3>
+                        <ul class="space-y-2 text-sm text-gray-700">
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-700 mt-1">•</span>
+                                Fewer brands controlled more volume
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-700 mt-1">•</span>
+                                Hero SKUs absorbed displaced volume
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-700 mt-1">•</span>
+                                Long-tail participation declined fastest
+                            </li>
+                            <li class="flex items-start gap-2">
+                                <span class="text-teal-700 mt-1">•</span>
+                                Market power consolidated upward
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Top Products -->
+            <div class="mt-8 grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-gray-50 rounded-xl p-5 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <p class="text-2xl font-bold text-teal-800 trend-number">4.2%</p>
+                    <p class="font-medium text-gray-900 text-sm mt-1">Clean Towels XL®</p>
+                    <p class="text-xs text-gray-500">Clean Skin Club</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-5 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <p class="text-2xl font-bold text-teal-800 trend-number">3.8%</p>
+                    <p class="font-medium text-gray-900 text-sm mt-1">Mighty Patch™ Original</p>
+                    <p class="text-xs text-gray-500">Mighty Patch</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-5 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <p class="text-2xl font-bold text-teal-800 trend-number">3.5%</p>
+                    <p class="font-medium text-gray-900 text-sm mt-1">Toleriane Double Repair</p>
+                    <p class="text-xs text-gray-500">La Roche-Posay</p>
+                </div>
+                <div class="bg-gray-50 rounded-xl p-5 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <p class="text-2xl font-bold text-teal-800 trend-number">3.5%</p>
+                    <p class="font-medium text-gray-900 text-sm mt-1">2% BHA Liquid Exfoliant</p>
+                    <p class="text-xs text-gray-500">Paula's Choice</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Leading Brands Table -->
+    <section id="brands" class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Brand Rankings</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Skincare's 2025 Sales Leaders in 2025</h2>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200">
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Rank</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Brand</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Share</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Avg. Price</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">YoY Change</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Key Strength</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-yellow-400 rounded text-white text-xs font-bold inline-flex items-center justify-center">1</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">CeraVe</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">12.3%</td>
+                                <td class="py-3 px-4 text-gray-600">$18.50</td>
+                                <td class="py-3 px-4 text-gray-400">—</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Clinical credibility + broad trust</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-300 rounded text-white text-xs font-bold inline-flex items-center justify-center">2</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Medicube</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">9.3%</td>
+                                <td class="py-3 px-4 text-gray-600">$30.46</td>
+                                <td class="py-3 px-4 text-green-600 font-medium">+8.9%</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Focused hero SKUs (pads, ampoules)</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-orange-400 rounded text-white text-xs font-bold inline-flex items-center justify-center">3</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">La Roche-Posay</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">8.4%</td>
+                                <td class="py-3 px-4 text-gray-600">$32.60</td>
+                                <td class="py-3 px-4 text-green-600 font-medium">+0.8%</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Dermatology-backed authority</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">4</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Clean Skin Club</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">4.2%</td>
+                                <td class="py-3 px-4 text-gray-600">$26.90</td>
+                                <td class="py-3 px-4 text-green-600 font-medium">+0.1%</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Narrow assortment, clear conversion</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">5</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Mighty Patch</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">3.9%</td>
+                                <td class="py-3 px-4 text-gray-600">$19.72</td>
+                                <td class="py-3 px-4 text-green-600 font-medium">+0.3%</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Single-category dominance</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">6</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Paula's Choice</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">3.6%</td>
+                                <td class="py-3 px-4 text-gray-600">$35.23</td>
+                                <td class="py-3 px-4 text-gray-400">—</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Ingredient authority, review density</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">7</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">EltaMD</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">3.4%</td>
+                                <td class="py-3 px-4 text-gray-600">$42.41</td>
+                                <td class="py-3 px-4 text-gray-400">—</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Premium sunscreen positioning</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">8</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Biodance</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">3.4%</td>
+                                <td class="py-3 px-4 text-gray-600">$33.78</td>
+                                <td class="py-3 px-4 text-green-600 font-medium">+1.2%</td>
+                                <td class="py-3 px-4 text-sm text-gray-600">Single hero SKU + strong reviews</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What the Data Reinforces -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Analysis</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">What the Data Reinforces</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-50 rounded-xl p-6 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Authority Wins</h3>
+                    <p class="text-sm text-gray-600">Brands with clinical credibility and dermatologist backing captured disproportionate share.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Hero SKUs Dominate</h3>
+                    <p class="text-sm text-gray-600">Individual products captured 3-4%+ share. Multiple brands derived majority sales from 1-2 SKUs.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-6 card-hover cursor-pointer border border-transparent hover:border-teal-200">
+                    <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center mb-4">
+                        <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-2">Ads Support, Don't Create</h3>
+                    <p class="text-sm text-gray-600">Paid media worked best for brands with existing momentum. Ads defended share, didn't build it.</p>
+                </div>
+            </div>
+
+            <!-- Paid Media Callout -->
+            <div class="mt-8 bg-gold-50 border border-gold-200 rounded-xl p-6">
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-gold-400 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">The Paid Media Reality</h3>
+                        <p class="text-sm text-gray-700">"Ads worked best for brands that were already popular. Paid media stopped working on its own. Ads could support demand, but they could not replace it."</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 2026 Outlook -->
+    <section id="outlook" class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Future Outlook</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Global Skincare Market 2026</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-3 gap-6 mb-10">
+                <div class="bg-teal-800 rounded-xl p-6 text-white card-hover cursor-pointer">
+                    <p class="text-4xl font-bold mb-1">$189B</p>
+                    <p class="text-teal-200 text-sm">Projected Market Size</p>
+                    <p class="text-teal-300 text-xs mt-1">by end of 2026</p>
+                </div>
+                <div class="bg-green-600 rounded-xl p-6 text-white card-hover cursor-pointer">
+                    <p class="text-4xl font-bold mb-1">6.8%</p>
+                    <p class="text-green-100 text-sm">Annual Growth Rate</p>
+                    <p class="text-green-200 text-xs mt-1">sustained momentum</p>
+                </div>
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer">
+                    <p class="text-2xl font-bold text-gray-900 mb-1">Asia-Pacific</p>
+                    <p class="text-gray-600 text-sm">Dominant Region</p>
+                    <p class="text-gray-500 text-xs mt-1">K-Beauty 3.0 & biotech innovation</p>
+                </div>
+            </div>
+
+            <!-- Fastest Growing Segments -->
+            <div class="bg-white rounded-xl p-6 border border-gray-200 mb-10">
+                <h3 class="font-semibold text-gray-900 mb-1">Fastest-Growing Segments</h3>
+                <p class="text-sm text-gray-500 mb-6">Year-over-year growth projections for 2026</p>
+                <div class="chart-container">
+                    <canvas id="segmentsChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Consumer Priorities -->
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer hover:border-pink-200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-pink-100 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-pink-600">Z</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Gen Z Priorities</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full"></span>Mental wellness integration</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full"></span>Eco-packaging requirements</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full"></span>Brand values alignment</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-pink-500 rounded-full"></span>Radical transparency</li>
+                    </ul>
+                </div>
+
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer hover:border-blue-200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                            <span class="font-bold text-blue-600">M</span>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">Millennial Priorities</h3>
+                    </div>
+                    <ul class="space-y-2 text-sm text-gray-600">
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>Clinical efficacy proof</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>Data-backed results</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>Ingredient transparency</li>
+                        <li class="flex items-center gap-2"><span class="w-1.5 h-1.5 bg-blue-500 rounded-full"></span>Long-term routine fit</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seven Trends -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">2026 Trends</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Seven Trends Expected in 2026</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 card-hover cursor-pointer hover:border-teal-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 bg-teal-800 text-white rounded text-xs font-bold flex items-center justify-center">01</span>
+                        <h3 class="font-semibold text-gray-900 text-sm">Skin Longevity Replaces "Anti-Aging"</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">Prevention, resilience, and long-term skin health become key messaging.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 card-hover cursor-pointer hover:border-teal-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 bg-teal-800 text-white rounded text-xs font-bold flex items-center justify-center">02</span>
+                        <h3 class="font-semibold text-gray-900 text-sm">Biotech Beauty Becomes Standard</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">"Clinically backed," "lab-validated," "next-gen actives" language sells.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 card-hover cursor-pointer hover:border-teal-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 bg-teal-800 text-white rounded text-xs font-bold flex items-center justify-center">03</span>
+                        <h3 class="font-semibold text-gray-900 text-sm">Exosomes Going Mainstream</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">Exosome skincare transitions from niche to mass interest.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 card-hover cursor-pointer hover:border-teal-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 bg-teal-800 text-white rounded text-xs font-bold flex items-center justify-center">04</span>
+                        <h3 class="font-semibold text-gray-900 text-sm">Neurocosmetics Gain Traction</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">Messaging connects to calm, stress, sleep, and mental wellness.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 card-hover cursor-pointer hover:border-teal-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 bg-teal-800 text-white rounded text-xs font-bold flex items-center justify-center">05</span>
+                        <h3 class="font-semibold text-gray-900 text-sm">Hyper-Personalization</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">Skin quizzes, diagnostics, and "made for you" positioning wins.</p>
+                </div>
+
+                <div class="bg-gray-50 rounded-xl p-5 border border-gray-100 card-hover cursor-pointer hover:border-teal-200">
+                    <div class="flex items-center gap-2 mb-3">
+                        <span class="w-6 h-6 bg-teal-800 text-white rounded text-xs font-bold flex items-center justify-center">06</span>
+                        <h3 class="font-semibold text-gray-900 text-sm">Barrier-First & Climate-Adaptive</h3>
+                    </div>
+                    <p class="text-xs text-gray-600">Barrier repair becomes default. Climate impact messaging rises.</p>
+                </div>
+
+                <div class="bg-teal-800 rounded-xl p-5 md:col-span-2 lg:col-span-3 card-hover cursor-pointer">
+                    <div class="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
+                        <div>
+                            <div class="flex items-center gap-2 mb-2">
+                                <span class="w-6 h-6 bg-white text-teal-800 rounded text-xs font-bold flex items-center justify-center">07</span>
+                                <h3 class="font-semibold text-white text-sm">Continuity Becomes the New Growth Model</h3>
+                            </div>
+                            <p class="text-xs text-teal-200">Brands focus on retention over launches. Routines, refills, and subscriptions win.</p>
+                        </div>
+                        <div class="flex gap-3">
+                            <div class="text-center px-4 py-2 bg-teal-700 rounded-lg">
+                                <p class="font-semibold text-white text-sm">Routines</p>
+                            </div>
+                            <div class="text-center px-4 py-2 bg-teal-700 rounded-lg">
+                                <p class="font-semibold text-white text-sm">Refills</p>
+                            </div>
+                            <div class="text-center px-4 py-2 bg-teal-700 rounded-lg">
+                                <p class="font-semibold text-white text-sm">Subscriptions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Market Health Indicators -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Performance Metrics</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Market Health Indicators</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Indicator 1 -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer text-center">
+                    <div class="relative w-32 h-32 mx-auto mb-4">
+                        <canvas id="healthChart1"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold text-teal-800">78%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">Brand Retention</h3>
+                    <p class="text-xs text-gray-500">YoY brand continuity</p>
+                </div>
+
+                <!-- Indicator 2 -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer text-center">
+                    <div class="relative w-32 h-32 mx-auto mb-4">
+                        <canvas id="healthChart2"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold text-green-600">65%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">Organic Share</h3>
+                    <p class="text-xs text-gray-500">Non-paid visibility</p>
+                </div>
+
+                <!-- Indicator 3 -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer text-center">
+                    <div class="relative w-32 h-32 mx-auto mb-4">
+                        <canvas id="healthChart3"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold text-orange-500">42%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">Hero SKU Reliance</h3>
+                    <p class="text-xs text-gray-500">Top SKU contribution</p>
+                </div>
+
+                <!-- Indicator 4 -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover cursor-pointer text-center">
+                    <div class="relative w-32 h-32 mx-auto mb-4">
+                        <canvas id="healthChart4"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-2xl font-bold text-purple-600">89%</span>
+                        </div>
+                    </div>
+                    <h3 class="font-semibold text-gray-900 mb-1">Review Velocity</h3>
+                    <p class="text-xs text-gray-500">Review health score</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Items - Moisturizers -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Category Deep Dive</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Skincare's #1 Year Items: Moisturizers in 2025</h2>
+            </div>
+
+            <div class="bg-white rounded-xl border border-gray-200 overflow-hidden mb-8">
+                <div class="overflow-x-auto">
+                    <table class="w-full">
+                        <thead>
+                            <tr class="bg-gray-50 border-b border-gray-200">
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Rank</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Product</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Brand</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Share</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Avg. Price</th>
+                                <th class="text-left py-3 px-4 text-xs font-semibold text-gray-500 uppercase">Reviews</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-100">
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-yellow-400 rounded text-white text-xs font-bold inline-flex items-center justify-center">1</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Moisturizing Cream 19oz</td>
+                                <td class="py-3 px-4 text-gray-600">CeraVe</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">8.7%</td>
+                                <td class="py-3 px-4 text-gray-600">$18.50</td>
+                                <td class="py-3 px-4 text-gray-600">143,205</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-300 rounded text-white text-xs font-bold inline-flex items-center justify-center">2</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Toleriane Double Repair</td>
+                                <td class="py-3 px-4 text-gray-600">La Roche-Posay</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">6.2%</td>
+                                <td class="py-3 px-4 text-gray-600">$22.99</td>
+                                <td class="py-3 px-4 text-gray-600">98,412</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-orange-400 rounded text-white text-xs font-bold inline-flex items-center justify-center">3</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Daily Moisturizing Lotion</td>
+                                <td class="py-3 px-4 text-gray-600">CeraVe</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">5.8%</td>
+                                <td class="py-3 px-4 text-gray-600">$15.99</td>
+                                <td class="py-3 px-4 text-gray-600">87,231</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">4</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Water Cream</td>
+                                <td class="py-3 px-4 text-gray-600">Tatcha</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">4.1%</td>
+                                <td class="py-3 px-4 text-gray-600">$69.00</td>
+                                <td class="py-3 px-4 text-gray-600">42,891</td>
+                            </tr>
+                            <tr class="hover:bg-teal-50 transition-colors duration-200 cursor-pointer">
+                                <td class="py-3 px-4"><span class="w-6 h-6 bg-gray-200 rounded text-gray-600 text-xs font-bold inline-flex items-center justify-center">5</span></td>
+                                <td class="py-3 px-4 font-medium text-gray-900">Collagen Booster Cream</td>
+                                <td class="py-3 px-4 text-gray-600">Medicube</td>
+                                <td class="py-3 px-4 font-semibold text-teal-700">3.9%</td>
+                                <td class="py-3 px-4 text-gray-600">$38.00</td>
+                                <td class="py-3 px-4 text-gray-600">31,205</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Category Stats -->
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-4">
+                <div class="bg-teal-800 rounded-xl p-5 text-center text-white card-hover cursor-pointer">
+                    <p class="text-3xl font-bold trend-number">24%</p>
+                    <p class="text-teal-200 text-sm mt-1">Of Total Category</p>
+                    <p class="text-teal-300 text-xs">Moisturizer share</p>
+                </div>
+                <div class="bg-teal-700 rounded-xl p-5 text-center text-white card-hover cursor-pointer">
+                    <p class="text-3xl font-bold trend-number">$24.80</p>
+                    <p class="text-teal-200 text-sm mt-1">Average Price</p>
+                    <p class="text-teal-300 text-xs">+2.3% YoY</p>
+                </div>
+                <div class="bg-teal-600 rounded-xl p-5 text-center text-white card-hover cursor-pointer">
+                    <p class="text-3xl font-bold trend-number">89</p>
+                    <p class="text-teal-200 text-sm mt-1">Active Brands</p>
+                    <p class="text-teal-300 text-xs">-18% YoY</p>
+                </div>
+                <div class="bg-teal-500 rounded-xl p-5 text-center text-white card-hover cursor-pointer">
+                    <p class="text-3xl font-bold trend-number">4.6</p>
+                    <p class="text-teal-100 text-sm mt-1">Avg. Rating</p>
+                    <p class="text-teal-200 text-xs">Top 10 products</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Inventory Snapshot -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Supply Chain</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Inventory Snapshot</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8">
+                <!-- Stock Status -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 class="font-semibold text-gray-900 mb-4">Stock Status Distribution</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600 flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-green-500 rounded-full"></span>In Stock
+                                </span>
+                                <span class="font-semibold text-gray-900">82%</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-green-500 rounded-full" style="width: 82%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600 flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-yellow-500 rounded-full"></span>Low Stock
+                                </span>
+                                <span class="font-semibold text-gray-900">12%</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-yellow-500 rounded-full" style="width: 12%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between text-sm mb-1">
+                                <span class="text-gray-600 flex items-center gap-2">
+                                    <span class="w-3 h-3 bg-red-500 rounded-full"></span>Out of Stock
+                                </span>
+                                <span class="font-semibold text-gray-900">6%</span>
+                            </div>
+                            <div class="h-2 bg-gray-200 rounded-full">
+                                <div class="h-2 bg-red-500 rounded-full" style="width: 6%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Inventory Insights -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200">
+                    <h3 class="font-semibold text-gray-900 mb-4">Key Inventory Insights</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900 text-sm">Improved stock levels</p>
+                                <p class="text-xs text-gray-500">6% reduction in OOS rates vs 2024</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 bg-yellow-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900 text-sm">Seasonal volatility</p>
+                                <p class="text-xs text-gray-500">Sunscreen OOS spikes in Q2</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3 p-3 bg-gray-50 rounded-lg">
+                            <div class="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center flex-shrink-0">
+                                <svg class="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="font-medium text-gray-900 text-sm">Hero SKU priority</p>
+                                <p class="text-xs text-gray-500">Top 10 SKUs maintained 95% in-stock</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sponsored vs Organic -->
+    <section class="bg-white py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Visibility Analysis</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Sponsored vs Organic Considerations</h2>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-8 mb-8">
+                <!-- Sponsored -->
+                <div class="bg-gradient-to-br from-orange-50 to-orange-100 rounded-xl p-6 border border-orange-200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 text-lg">Sponsored Visibility</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-orange-500 mt-1">•</span>
+                            CPC increased 12% YoY to $1.24 average
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-orange-500 mt-1">•</span>
+                            ROAS declined from 4.2x to 3.6x
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-orange-500 mt-1">•</span>
+                            Branded terms became cost-prohibitive for new entrants
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-orange-500 mt-1">•</span>
+                            Sponsored Brand adoption grew 23%
+                        </li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-orange-200">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Share of Visibility</span>
+                            <span class="text-2xl font-bold text-orange-600">35%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Organic -->
+                <div class="bg-gradient-to-br from-teal-50 to-teal-100 rounded-xl p-6 border border-teal-200">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-teal-700 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900 text-lg">Organic Visibility</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-700">
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-700 mt-1">•</span>
+                            Organic share grew 15.7% YoY
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-700 mt-1">•</span>
+                            Review velocity became decisive factor
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-700 mt-1">•</span>
+                            PDP optimization drove ranking gains
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <span class="text-teal-700 mt-1">•</span>
+                            Authority signals weighted more heavily
+                        </li>
+                    </ul>
+                    <div class="mt-4 pt-4 border-t border-teal-200">
+                        <div class="flex justify-between items-center">
+                            <span class="text-sm text-gray-600">Share of Visibility</span>
+                            <span class="text-2xl font-bold text-teal-700">65%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Key Insight -->
+            <div class="bg-gold-50 border border-gold-200 rounded-xl p-6">
+                <div class="flex gap-4">
+                    <div class="w-10 h-10 bg-gold-400 rounded-lg flex items-center justify-center flex-shrink-0">
+                        <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+                        </svg>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-900 mb-2">Strategic Insight</h3>
+                        <p class="text-sm text-gray-700">The most effective 2025 strategies combined organic foundation-building with surgical paid amplification. Brands that relied solely on sponsored placements without organic momentum saw diminishing returns throughout the year.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Takeaways and Considerations -->
+    <section class="bg-gray-50 py-16">
+        <div class="max-w-6xl mx-auto px-6">
+            <div class="mb-10">
+                <span class="section-label">Strategic Summary</span>
+                <h2 class="text-2xl font-bold text-gray-900 mt-3">Takeaways and Considerations</h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-6 mb-8">
+                <!-- For Established Brands -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-teal-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-teal-700" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">For Established Brands</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Double down on hero SKUs rather than expanding assortment
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Invest in review velocity and response programs
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Optimize PDPs for authority signals
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-teal-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Use paid media to defend, not expand
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- For Emerging Brands -->
+                <div class="bg-white rounded-xl p-6 border border-gray-200 card-hover">
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-10 h-10 bg-orange-100 rounded-lg flex items-center justify-center">
+                            <svg class="w-5 h-5 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <h3 class="font-semibold text-gray-900">For Emerging Brands</h3>
+                    </div>
+                    <ul class="space-y-3 text-sm text-gray-600">
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Focus on single-category dominance before expansion
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Build organic momentum before scaling paid
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Target underserved niches with clear authority angles
+                        </li>
+                        <li class="flex items-start gap-2">
+                            <svg class="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                            </svg>
+                            Prioritize review generation over broad visibility
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Final Summary -->
+            <div class="bg-teal-800 rounded-xl p-8 text-white">
+                <h3 class="font-semibold text-xl mb-4">The 2025 Skincare Playbook</h3>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-bold">1</span>
+                        </div>
+                        <p class="font-medium mb-1">Focus</p>
+                        <p class="text-teal-200 text-sm">Narrow your SKU count, deepen your hero products</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-bold">2</span>
+                        </div>
+                        <p class="font-medium mb-1">Authority</p>
+                        <p class="text-teal-200 text-sm">Build clinical credibility and review density</p>
+                    </div>
+                    <div class="text-center">
+                        <div class="w-12 h-12 bg-teal-700 rounded-full flex items-center justify-center mx-auto mb-3">
+                            <span class="text-xl font-bold">3</span>
+                        </div>
+                        <p class="font-medium mb-1">Defend</p>
+                        <p class="text-teal-200 text-sm">Use paid to protect share, not create demand</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="hero-gradient py-16">
+        <div class="max-w-6xl mx-auto px-6 text-center">
+            <h2 class="text-2xl font-bold text-white mb-3">Get the Complete 2025 Report</h2>
+            <p class="text-teal-200 mb-8 max-w-xl mx-auto">Access detailed insights, brand deep-dives, and strategic recommendations.</p>
+            <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                <button class="bg-white text-teal-800 px-6 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all duration-300 hover:shadow-xl hover:-translate-y-1 hover:scale-105">
+                    Download Full Report
+                </button>
+                <button class="border border-teal-400 text-white px-6 py-3 rounded-lg font-semibold hover:bg-teal-700 transition-all duration-300 hover:shadow-xl hover:-translate-y-1">
+                    Schedule Consultation
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Charts -->
+    <script>
+        Chart.defaults.font.family = 'Inter, system-ui, sans-serif';
+
+        // Market Share Chart
+        new Chart(document.getElementById('marketShareChart'), {
+            type: 'bar',
+            data: {
+                labels: ['CeraVe', 'Medicube', 'La Roche-Posay', 'Clean Skin Club', 'Mighty Patch', "Paula's Choice", 'EltaMD', 'Biodance'],
+                datasets: [{
+                    data: [12.3, 9.3, 8.4, 4.2, 3.9, 3.6, 3.4, 3.4],
+                    backgroundColor: '#0d4d4d',
+                    borderRadius: 4,
+                }]
+            },
+            options: {
+                indexAxis: 'y',
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    x: {
+                        beginAtZero: true,
+                        max: 15,
+                        ticks: { callback: v => v + '%', color: '#6B7280', font: { size: 11 } },
+                        grid: { color: '#E5E7EB' }
+                    },
+                    y: {
+                        grid: { display: false },
+                        ticks: { color: '#374151', font: { size: 11 } }
+                    }
+                }
+            }
+        });
+
+        // Segments Chart
+        new Chart(document.getElementById('segmentsChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Psychodermatology', 'Exosome Serums', 'Barrier Repair 2.0', 'Menopausal Skincare', 'Scalp Care Hybrids'],
+                datasets: [{
+                    data: [35, 28, 22, 18, 15],
+                    backgroundColor: ['#0d4d4d', '#147373', '#178787', '#20a0a0', '#2bb8b8'],
+                    borderRadius: 4,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: { legend: { display: false } },
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: { callback: v => '~' + v + '%', color: '#6B7280', font: { size: 11 } },
+                        grid: { color: '#E5E7EB' }
+                    },
+                    x: {
+                        grid: { display: false },
+                        ticks: { color: '#374151', font: { size: 11 } }
+                    }
+                }
+            }
+        });
+
+        // Health Indicator Donut Charts
+        const donutConfig = (value, color) => ({
+            type: 'doughnut',
+            data: {
+                datasets: [{
+                    data: [value, 100 - value],
+                    backgroundColor: [color, '#E5E7EB'],
+                    borderWidth: 0,
+                }]
+            },
+            options: {
+                responsive: true,
+                maintainAspectRatio: true,
+                cutout: '75%',
+                plugins: { legend: { display: false }, tooltip: { enabled: false } }
+            }
+        });
+
+        new Chart(document.getElementById('healthChart1'), donutConfig(78, '#0d4d4d'));
+        new Chart(document.getElementById('healthChart2'), donutConfig(65, '#16a34a'));
+        new Chart(document.getElementById('healthChart3'), donutConfig(42, '#f97316'));
+        new Chart(document.getElementById('healthChart4'), donutConfig(89, '#9333ea'));
+    </script>
+</body>
+</html>
